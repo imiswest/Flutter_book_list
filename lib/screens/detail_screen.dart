@@ -1,25 +1,41 @@
 import 'package:flutter/material.dart';
 
 class DetailScreen extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final String description;
+  final String image;
+  DetailScreen({ //필드를 추가해 고정된 값이 아닌 변수에 해당하는 값이 화면에 출력되도록 수정
+    required this.title,
+    required this.subtitle,
+    required this.description,
+    required this.image,
+  });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('예제부터 배우는 거꾸로 파이썬')),
       body: Column(
-        children: [ //Column 내 children 총 3개
-          Image.network( //Column 내 첫 번째 children
-              'https://blog.kakaocdn.net/dn/bryLDA/btrIMBW3FAB/eFTxvdukNYKr4X8TmtpDik/img.jpg'),
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          //Column 내 children 총 5개
+          Image.network(//Column 내 첫 번째 children
+              image),
 
-          Padding( //Column 내 두 번째 children
-            padding: EdgeInsets.all(3),
+          Padding(
+            //Column 내 두 번째 children
+            padding: EdgeInsets.all(7),
           ),
 
-          Row( //Column 내 세 번째 children
+          Row(
+            //Column 내 세 번째 children
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [ //Row 내 children 총 2개
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              //Row 내 children 총 2개
 
-              Container( //Row 내 첫 번째 children
+              Container(
+                //Row 내 첫 번째 children
                 width: MediaQuery.of(context).size.width * 0.8,
                 //MediaQuery를 활용해 사이즈를 설정할 수 있음음                padding: EdgeInsets.all(10),
                 child: Column(
@@ -27,7 +43,7 @@ class DetailScreen extends StatelessWidget {
                   children: [
                     Container(
                       child: Text(
-                        '예제부터 배우는 거꾸로 파이썬',
+                        title,
                         style: TextStyle(
                           fontSize: 23,
                           fontWeight: FontWeight.bold,
@@ -35,13 +51,14 @@ class DetailScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '투자 · 로또 · 리뷰 등 6가지 유용한 주제로 시작하는 데이터 크롤링',
+                      subtitle,
                       style: TextStyle(fontSize: 18, color: Colors.grey),
                     ),
                   ],
                 ),
               ),
-              Container( //Row 내 두 번째 children
+              Container(
+                //Row 내 두 번째 children
                 width: MediaQuery.of(context).size.width * 0.15,
                 padding: EdgeInsets.all(10),
                 child: Center(
@@ -53,10 +70,57 @@ class DetailScreen extends StatelessWidget {
               )
             ],
           ),
-          Padding( //Column 내 두 번째 children
-            padding: EdgeInsets.all(3),
-          ),
 
+          Padding(
+            //Column 내 네 번째 children
+            padding: EdgeInsets.all(15),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                //Column 내 다섯 번째 children
+                children: [
+                  Icon(
+                    Icons.call,
+                    color: Colors.blue,
+                  ),
+                  Text(
+                    'Contact',
+                    style: TextStyle(color: Colors.blue),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Icon(
+                    Icons.near_me,
+                    color: Colors.blue,
+                  ),
+                  Text(
+                    'Route',
+                    style: TextStyle(color: Colors.blue),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  Icon(
+                    Icons.save,
+                    color: Colors.blue,
+                  ),
+                  Text(
+                    'save',
+                    style: TextStyle(color: Colors.blue),
+                  )
+                ],
+              ),
+            ],
+          ),
+          Container(
+            padding: EdgeInsets.all(15),
+            child: Text(description),
+          ),
         ],
       ),
     );

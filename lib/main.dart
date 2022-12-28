@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.lightGreen, //전체 테마 색깔
       ),
-      home: DetailScreen(),
+      home: ListScreen(),
     );
   }
 }
