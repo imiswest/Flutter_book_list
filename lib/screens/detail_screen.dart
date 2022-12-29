@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_book_list/models/book.dart';
 
 class DetailScreen extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final String description;
-  final String image;
-  DetailScreen({ //필드를 추가해 고정된 값이 아닌 변수에 해당하는 값이 화면에 출력되도록 수정
-    required this.title,
-    required this.subtitle,
-    required this.description,
-    required this.image,
-  });
+  final Book book;
+  DetailScreen(
+      { //필드를 추가해 고정된 값이 아닌 변수에 해당하는 값이 화면에 출력되도록 수정
+      required this.book});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('예제부터 배우는 거꾸로 파이썬')),
+      appBar: AppBar(title: Text(book.title)),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //Column 내 children 총 5개
           Image.network(//Column 내 첫 번째 children
-              image),
+              book.image),
 
           Padding(
             //Column 내 두 번째 children
@@ -43,7 +39,7 @@ class DetailScreen extends StatelessWidget {
                   children: [
                     Container(
                       child: Text(
-                        title,
+                        book.title,
                         style: TextStyle(
                           fontSize: 23,
                           fontWeight: FontWeight.bold,
@@ -51,7 +47,7 @@ class DetailScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      subtitle,
+                      book.subtitle,
                       style: TextStyle(fontSize: 18, color: Colors.grey),
                     ),
                   ],
@@ -119,7 +115,7 @@ class DetailScreen extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.all(15),
-            child: Text(description),
+            child: Text(book.description),
           ),
         ],
       ),

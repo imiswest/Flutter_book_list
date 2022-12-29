@@ -12,6 +12,8 @@ import 'package:flutter_book_list/repository/book_repository.dart';
 ///     ( DetailScreen( A:A, B:B ...) 이런 식으로 )
 
 class ListScreen extends StatelessWidget {
+  final List<Book> books = BookRepository().getBooks();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +22,14 @@ class ListScreen extends StatelessWidget {
           child: Text('도서 목록 앱'),
         ),
       ),
-
       body: ListView.builder(
+        //UI 작성하기
         itemCount: books.length,
-        itemBuilder: (context, index){
-          return BookTile(book: books[index]);
+        itemBuilder: (context, index) {
+          return Container(
+            padding: EdgeInsets.all(10),
+            child: BookTile(book: books[index]),
+          );
         },
       ),
     );
@@ -34,22 +39,19 @@ class ListScreen extends StatelessWidget {
 class BookTile extends StatelessWidget {
   final Book book; //생성자로 선언된 변수
 
-  BookTile({
-    required this.book
-});
+  BookTile({required this.book});
+
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return ListTile(
-      title: Text(title),
-      leading: Image.network(image),
+      title: Text(book.title),
+      leading: Image.network(book.image),
       onTap: () {
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => DetailScreen(
-            title: title,
-            subtitle: subtitle,
-            description: description,
-            image: image,
-          ),
+          MaterialPageRoute(
+            builder: (context) => DetailScreen(
+              book: book,
+            ),
           ),
         );
       }, // 여기서 title, subtitle, description, image 데이터를 다음 화면으로 이동하며 넘기게 됨
